@@ -2,10 +2,9 @@ let containerElement = document.getElementById('container');
 let playButton = document.getElementById('play-button');
 let cellNumber;
 let cellPerRow;
-
 const bombNumber = 16;
-
-let clickedCells = [];
+const clickedCells = [];
+let isGameEnded = false; 
 
 playButton.addEventListener('click', function() {
 
@@ -41,24 +40,25 @@ playButton.addEventListener('click', function() {
 
             newSquareElement.addEventListener('click', function() {
 
+            if (isGameEnded == false) {
+
                 newSquareElement.classList.add('blue');
 
                 if (!clickedCells.includes(parseInt(newSquareElement.innerText)))  {
 
                     clickedCells.push(parseInt(newSquareElement.innerText));
 
-                    //CHECK
-                    console.log('cella normale');
-                    console.log(clickedCells);
-                    //CHECK    
-
                 };
 
                 if (clickedCells.length == (cellNumber - bombNumber)) {
 
                     alert('Sei riuscito a evitare tutte le bombe! Hai vinto!');
+
+                    isGameEnded = true;
                     
-                }
+                };
+
+            };
 
             });
             
@@ -66,25 +66,32 @@ playButton.addEventListener('click', function() {
 
             newSquareElement.addEventListener('click', function() {
 
-                newSquareElement.classList.add('bomb');
-                
-                alert('Hai cliccato su una bomba! Hai perso!');
+                if (isGameEnded == false) {
 
-                let cells = document.querySelectorAll('.square');
+                    newSquareElement.classList.add('bomb');
+                    
+                    alert('Hai cliccato su una bomba! Hai perso!');
+
+                    let cells = document.querySelectorAll('.square');
 
                     for (let i = 0; i < cells.length; i++) {
 
-                        if (bombs.includes(i +1)) {
+                        if (bombs.includes(i + 1)) {
 
                             cells[i].classList.add('bomb');
 
-                        }
-                    }
+                        };
 
-                let outputElement = document.createElement('div');
-                outputElement.innerText = "Hai totalizzato " + clickedCells.length + " punto/i.";
-                outputElement.classList.add('output');
-                containerElement.append(outputElement);
+                    };
+
+                    let outputElement = document.createElement('div');
+                    outputElement.innerText = "Hai totalizzato " + clickedCells.length + " punto/i.";
+                    outputElement.classList.add('output');
+                    containerElement.append(outputElement);
+
+                    isGameEnded = true;
+
+                };
 
             });
 
@@ -95,40 +102,6 @@ playButton.addEventListener('click', function() {
     };
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //---------function: create a square----------------
