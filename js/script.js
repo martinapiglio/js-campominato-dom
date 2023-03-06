@@ -2,7 +2,10 @@ let containerElement = document.getElementById('container');
 let playButton = document.getElementById('play-button');
 let cellNumber;
 let cellPerRow;
+
 const bombNumber = 16;
+
+let clickedCells = [];
 
 playButton.addEventListener('click', function() {
 
@@ -33,30 +36,41 @@ playButton.addEventListener('click', function() {
     for (i = 1; i <= cellNumber; i++) {
 
         let newSquareElement = createSquare(i);
-        
+
         if (!bombs.includes(i)) {
 
             newSquareElement.addEventListener('click', function() {
-            
-                console.log('Hai cliccato la cella ' + newSquareElement.innerText);
-                newSquareElement.classList.add('blue');
-            
-            }); 
-        
-        } else {
-        
-            newSquareElement.addEventListener('click', function() {
-            
-                console.log('Hai cliccato la cella ' + newSquareElement.innerText);
-                newSquareElement.classList.add('bomb');
-            
-            }); 
-        
-        };
 
+                newSquareElement.classList.add('blue');
+
+                if (!clickedCells.includes(parseInt(newSquareElement.innerText)))  {
+
+                    clickedCells.push(parseInt(newSquareElement.innerText));
+
+                    //CHECK
+                    console.log('cella normale');
+                    console.log(clickedCells);
+                    //CHECK    
+                }
+                
+            });
+            
+        } else {
+
+            newSquareElement.addEventListener('click', function() {
+
+                newSquareElement.classList.add('bomb');
+                console.log('bomba');
+
+            });
+
+        };
+        
         containerElement.append(newSquareElement);
+
     };
 
+    
 
 });
 
@@ -116,7 +130,9 @@ function randomArray(arrayLenght, min, max) {
         let randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
         // check to avoid duplicate numbers
         if (!numbersArray.includes(randomNumber)) {
+
             numbersArray.push(randomNumber);
+
         };
 
     };
