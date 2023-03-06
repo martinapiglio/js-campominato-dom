@@ -51,8 +51,14 @@ playButton.addEventListener('click', function() {
                     console.log('cella normale');
                     console.log(clickedCells);
                     //CHECK    
+
+                };
+
+                if (clickedCells.length == (cellNumber - bombNumber)) {
+
+                    alert('Sei riuscito a evitare tutte le bombe! Hai vinto!');
                 }
-                
+
             });
             
         } else {
@@ -60,7 +66,15 @@ playButton.addEventListener('click', function() {
             newSquareElement.addEventListener('click', function() {
 
                 newSquareElement.classList.add('bomb');
-                console.log('bomba');
+                    //CHECK
+                    console.log('bomba');
+                    //CHECK
+                
+                alert('Hai cliccato su una bomba! Hai perso!');
+                let outputElement = document.createElement('div');
+                outputElement.innerText = "Hai totalizzato " + clickedCells.length + " punto/i.";
+                outputElement.classList.add('output');
+                containerElement.append(outputElement);
 
             });
 
@@ -69,8 +83,6 @@ playButton.addEventListener('click', function() {
         containerElement.append(newSquareElement);
 
     };
-
-    
 
 });
 

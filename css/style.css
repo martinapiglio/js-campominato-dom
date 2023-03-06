@@ -88,3 +88,9 @@ footer {
     color: white;
     background-color: #850606;
 }
+
+.output {
+    padding-top: 1em;
+    font-weight: bold;
+    font-size: larger;
+}
