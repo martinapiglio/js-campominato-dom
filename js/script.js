@@ -2,6 +2,7 @@ let containerElement = document.getElementById('container');
 let playButton = document.getElementById('play-button');
 let cellNumber;
 let cellPerRow;
+const bombNumber = 16;
 
 playButton.addEventListener('click', function() {
 
@@ -24,28 +25,39 @@ playButton.addEventListener('click', function() {
     };
     
     cellPerRow = Math.sqrt(cellNumber);   
+
+    let bombs = randomArray(bombNumber, 1, cellNumber);
+
+    console.log(bombs);
     
     for (i = 1; i <= cellNumber; i++) {
 
         let newSquareElement = createSquare(i);
         
-        newSquareElement.addEventListener('click', function() {
+        if (!bombs.includes(i)) {
 
-            newSquareElement.classList.toggle('blue');
-            console.log('Hai cliccato la cella ' + newSquareElement.innerText);
+            newSquareElement.addEventListener('click', function() {
+            
+                console.log('Hai cliccato la cella ' + newSquareElement.innerText);
+                newSquareElement.classList.add('blue');
+            
+            }); 
         
-        }); 
+        } else {
+        
+            newSquareElement.addEventListener('click', function() {
+            
+                console.log('Hai cliccato la cella ' + newSquareElement.innerText);
+                newSquareElement.classList.add('bomb');
+            
+            }); 
+        
+        };
 
         containerElement.append(newSquareElement);
     };
 
 
-
-
-
-                    //CHECK
-                    console.log(randomArray(16, 1, cellNumber));
-                    //CHECK
 });
 
 
