@@ -23,8 +23,8 @@ playButton.addEventListener('click', function() {
 
     };
     
-    cellPerRow = Math.sqrt(cellNumber);    
-
+    cellPerRow = Math.sqrt(cellNumber);   
+    
     for (i = 1; i <= cellNumber; i++) {
 
         let newSquareElement = createSquare(i);
@@ -39,7 +39,49 @@ playButton.addEventListener('click', function() {
         containerElement.append(newSquareElement);
     };
 
+
+
+
+
+                    //CHECK
+                    console.log(randomArray(16, 1, cellNumber));
+                    //CHECK
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //---------function: create a square----------------
 function createSquare(squareText) {
@@ -50,4 +92,22 @@ function createSquare(squareText) {
     newElement.innerText = squareText;
 
     return newElement;
-}   
+};   
+
+//---------function: create an array of random numbers----------------
+function randomArray(arrayLenght, min, max) {
+
+    const numbersArray = []; //empty array
+
+    while (numbersArray.length < arrayLenght) {
+
+        let randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+        // check to avoid duplicate numbers
+        if (!numbersArray.includes(randomNumber)) {
+            numbersArray.push(randomNumber);
+        };
+
+    };
+
+    return numbersArray;
+};
