@@ -31,6 +31,8 @@ playButton.addEventListener('click', function() {
     let bombs = randomArray(bombNumber, 1, cellNumber);
 
     console.log(bombs);
+
+    containerElement.innerHTML = '';
     
     for (i = 1; i <= cellNumber; i++) {
 
